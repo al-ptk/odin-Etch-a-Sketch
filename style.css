@@ -10,6 +10,11 @@
     --gridSize: 50rem;
 }
 
+button {
+    width: 10rem;
+    margin: 1rem;
+}
+
 body {
     display: flex;
     flex-flow: column wrap;

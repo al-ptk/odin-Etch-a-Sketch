@@ -22,8 +22,6 @@ function setHoveredState (e) {
 function createClearButton (parent, ownGrid) {
     const btn = document.createElement('button');
     btn.textContent = 'Clear';
-    btn.style.width = '10rem';
-    btn.style.margin = '1rem';
     btn.addEventListener('click', (e) => clearGrid(ownGrid));
     return parent.appendChild(btn);
 }
@@ -31,6 +29,8 @@ function createClearButton (parent, ownGrid) {
 function clearGrid (grid) {
     grid.childNodes.forEach(div => div.style.backgroundColor = 'lightgray')
 }
+
+
 
 const body = document.querySelector("body");
 const container = createGrid(body, 16);
