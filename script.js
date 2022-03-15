@@ -1,6 +1,3 @@
-const body = document.querySelector("body");
-const container = createGrid(body, 16);
-
 function createGrid (parent, cellNumber) {
     const container = document.createElement('div');
     container.classList.add('grid-container')
@@ -21,3 +18,20 @@ function setHoveredState (e) {
     console.log(elem);
     elem.style.background = 'black';
 }
+
+function createClearButton (parent, ownGrid) {
+    const btn = document.createElement('button');
+    btn.textContent = 'Clear';
+    btn.style.width = '10rem';
+    btn.style.margin = '1rem';
+    btn.addEventListener('click', (e) => clearGrid(ownGrid));
+    return parent.appendChild(btn);
+}
+
+function clearGrid (grid) {
+    grid.childNodes.forEach(div => div.style.backgroundColor = 'lightgray')
+}
+
+const body = document.querySelector("body");
+const container = createGrid(body, 16);
+const clearBtn = createClearButton(body, container);

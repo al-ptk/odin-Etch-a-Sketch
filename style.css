@@ -7,17 +7,24 @@
 :root {
     font-size: 10px;
     --cellSize: 10rem;
+    --gridSize: 50rem;
 }
 
 body {
     display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+
 }
 
 .grid-container {
-    margin: 5rem;
     /* border: .2px solid; */
+    margin: 1rem;
+    max-width: var(--gridSize);
+    height: var(--gridSize);
     display: grid;
-    grid-template-columns: repeat(4, var(--cellSize));
+    grid-template-columns: repeat(auto-fill, var(--cellSize));
+    grid-template-rows: repeat(auto-fill, var(--cellSize));
     row-gap: 1rem;
     column-gap: 1rem;
 }
@@ -28,8 +35,4 @@ body {
     background-color: lightgray;
     border: .2rem solid;
     border-radius: .5rem;
-}
-
-.cell-hovered {
-    background-color: black;
 }
