@@ -9,6 +9,14 @@ function createGrid (parent, cellNumber) {
         cell.classList.add('cell');
         container.appendChild(cell);
     }
+    container.childNodes.forEach(
+        div => div.addEventListener('mouseover', setHoveredState)
+    );
     //appendChild returns the reference to child
     return parent.appendChild(container); 
+}
+
+function setHoveredState (e) {
+    const elem = e.target;
+    elem.classList.add('cell-hovered')
 }

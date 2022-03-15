@@ -29,3 +29,7 @@ body {
     border: .2rem solid;
     border-radius: .5rem;
 }
+
+.cell-hovered {
+    background-color: black;
+}
