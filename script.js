@@ -18,5 +18,6 @@ function createGrid (parent, cellNumber) {
 
 function setHoveredState (e) {
     const elem = e.target;
-    elem.classList.add('cell-hovered')
+    console.log(elem);
+    elem.style.background = 'black';
 }
