@@ -1,7 +1,7 @@
-function createGrid (parent, cellNumber) {
+function createGrid (parent, gridEdge) {
     const container = document.createElement('div');
     container.classList.add('grid-container')
-    for (let i = 0; i < cellNumber; i++) {
+    for (let i = 0; i < gridEdge ** 2; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         container.appendChild(cell);
@@ -15,7 +15,6 @@ function createGrid (parent, cellNumber) {
 
 function setHoveredState (e) {
     const elem = e.target;
-    console.log(elem);
     elem.style.background = 'black';
 }
 
@@ -30,8 +29,14 @@ function clearGrid (grid) {
     grid.childNodes.forEach(div => div.style.backgroundColor = 'lightgray')
 }
 
-
+function createNewGrid (parent, oldGrid) {
+    const gridEdge = +prompt('What is the row size?');
+    if (gridEdge == NaN) alert('Invalid number!');
+    parent.removeChild(oldGrid);
+    const newGrid = parent.appendChild(createGrid(parent, gridEdge));
+    parent.replaceChild(newGrid, parent.firstChild);
+}
 
 const body = document.querySelector("body");
-const container = createGrid(body, 16);
+const container = createGrid(body, 6);
 const clearBtn = createClearButton(body, container);
