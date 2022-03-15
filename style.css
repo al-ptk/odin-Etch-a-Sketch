@@ -6,4 +6,26 @@
 
 :root {
     font-size: 10px;
+    --cellSize: 10rem;
+}
+
+body {
+    display: flex;
+}
+
+.grid-container {
+    margin: 5rem;
+    /* border: .2px solid; */
+    display: grid;
+    grid-template-columns: repeat(4, var(--cellSize));
+    row-gap: 1rem;
+    column-gap: 1rem;
+}
+
+.cell {
+    width: var(--cellSize);
+    height: var(--cellSize);
+    background-color: lightgray;
+    border: .2rem solid;
+    border-radius: .5rem;
 }
