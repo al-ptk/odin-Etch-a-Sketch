@@ -1,7 +1,8 @@
-function createGrid (parent, gridEdge) {
+function createGrid (parent, gridEdgeSize) {
+    // This function returns a new grid-container reference
     const container = document.createElement('div');
     container.classList.add('grid-container')
-    for (let i = 0; i < gridEdge ** 2; i++) {
+    for (let i = 0; i < gridEdgeSize ** 2; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         container.appendChild(cell);
@@ -9,6 +10,8 @@ function createGrid (parent, gridEdge) {
     container.childNodes.forEach(
         div => div.addEventListener('mouseover', setHoveredState)
     );
+    //Sets :root property
+    document.documentElement.style.setProperty('--edgeSize', gridEdgeSize);
     //appendChild returns the reference to child
     return parent.appendChild(container); 
 }
@@ -18,28 +21,27 @@ function setHoveredState (e) {
     elem.style.background = 'black';
 }
 
-function createClearButton (parent, ownGrid) {
+function createResetButton (parent, ownGrid) {
     const btn = document.createElement('button');
-    btn.textContent = 'Clear';
-    btn.addEventListener('click', (e) => clearGrid(ownGrid));
+    btn.textContent = 'Reset';
+    btn.addEventListener('click', (e) => resetGrid(ownGrid));
     return parent.appendChild(btn);
 }
 
-function clearGrid (grid) {
+function resetGrid (grid) {
     grid.childNodes.forEach(div => div.style.backgroundColor = 'lightgray')
 }
 
-function createNewGrid (parent, oldGrid) {
+function createNewGrid (oldGrid) {
+    const parent = oldGrid.parentNode
     const gridEdge = +prompt('What is the row size?');
     if (gridEdge == NaN) alert('Invalid number!');
     parent.removeChild(oldGrid);
-    const newGrid = parent.appendChild(createGrid(parent, gridEdge));
-    parent.replaceChild(newGrid, parent.firstChild);
+    oldGrid = parent.appendChild(createGrid(parent, gridEdge));
+    parent.replaceChild(oldGrid, parent.firstChild);
 }
 
 const gridEdgeSize = 100;
 const body = document.querySelector("body");
 const container = createGrid(body, gridEdgeSize);
-const clearBtn = createClearButton(body, container);
-const root = document.documentElement;
-root.style.setProperty('--edgeSize', gridEdgeSize);
+const resetBtn = createResetButton(body, container);
