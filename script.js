@@ -28,20 +28,19 @@ function createResetButton (parent, ownGrid) {
     return parent.appendChild(btn);
 }
 
-function resetGrid (grid) {
-    grid.childNodes.forEach(div => div.style.backgroundColor = 'lightgray')
-}
-
-function createNewGrid (oldGrid) {
-    const parent = oldGrid.parentNode
+function resetGrid () {
     const gridEdge = +prompt('What is the row size?');
-    if (gridEdge == NaN) alert('Invalid number!');
-    parent.removeChild(oldGrid);
-    oldGrid = parent.appendChild(createGrid(parent, gridEdge));
-    parent.replaceChild(oldGrid, parent.firstChild);
+    if (gridEdge == NaN || gridEdge > 100 || gridEdge < 1) {
+        alert('Invalid number!');
+        return;
+    }
+    cParent = container.parentNode;
+    cParent.removeChild(container);
+    container = createGrid(body, gridEdge);
+    cParent.replaceChild(container, cParent.firstChild);
 }
 
 const gridEdgeSize = 100;
 const body = document.querySelector("body");
-const container = createGrid(body, gridEdgeSize);
+var container = createGrid(body, gridEdgeSize);
 const resetBtn = createResetButton(body, container);
