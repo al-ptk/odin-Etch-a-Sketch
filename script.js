@@ -10,7 +10,7 @@ function createGrid (parent, gridEdgeSize) {
     container.childNodes.forEach(
         div => div.addEventListener('mouseover', setHoveredState)
     );
-    //Sets :root property
+    //Sets :root property on css
     document.documentElement.style.setProperty('--edgeSize', gridEdgeSize);
     //appendChild returns the reference to child
     return parent.appendChild(container); 
@@ -18,29 +18,57 @@ function createGrid (parent, gridEdgeSize) {
 
 function setHoveredState (e) {
     const elem = e.target;
-    elem.style.background = 'black';
+    if (partyUp) {
+        elem.style.background = `hsl(${backgroundHue}, 100%, 50%)`;
+    } else {
+        elem.style.background = 'black';
+    }
+    backgroundHue += 5;
 }
 
 function createResetButton (parent, ownGrid) {
     const btn = document.createElement('button');
     btn.textContent = 'Reset';
-    btn.addEventListener('click', (e) => resetGrid(ownGrid));
+    btn.addEventListener('click', (e) => resetGrid());
     return parent.appendChild(btn);
 }
 
 function resetGrid () {
-    const gridEdge = +prompt('What is the row size?');
-    if (gridEdge == NaN || gridEdge > 100 || gridEdge < 1) {
+    const gridEdgeSize = +prompt('What is the row size?', 100);
+    if (isNaN(gridEdgeSize) || gridEdgeSize > 100 || gridEdgeSize < 1) {
         alert('Invalid number!');
         return;
+    } else {
+        const cParent = container.parentNode;
+        cParent.removeChild(container);
+        container = createGrid(body, gridEdgeSize);
+        cParent.replaceChild(container, cParent.firstChild);
     }
-    cParent = container.parentNode;
-    cParent.removeChild(container);
-    container = createGrid(body, gridEdge);
-    cParent.replaceChild(container, cParent.firstChild);
 }
 
+function createPartyUpButton (parent) {
+    const btn = document.createElement('button');
+    btn.textContent = "Party UP!";
+    btn.value = 'off';
+    btn.addEventListener('click', toggleParty)
+    parent.appendChild(btn);
+}
+
+function toggleParty (e) {
+    let newBg = !partyUp ? '#111' : 'white';
+    e.target.textContent = !partyUp ? 'party down...' : 'Party UP!';
+    document.documentElement.style.background = newBg;
+    return partyUp = !partyUp;
+}
+
+// Initial Parameters
 const gridEdgeSize = 100;
+var backgroundHue = 0;
+var partyUp = false;
+
+// 'Main' Function
 const body = document.querySelector("body");
 var container = createGrid(body, gridEdgeSize);
-const resetBtn = createResetButton(body, container);
+const btnDiv = body.appendChild(document.createElement('div'));
+const resetBtn = createResetButton(btnDiv, container);
+const partyUpButton = createPartyUpButton(btnDiv);

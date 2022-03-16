@@ -19,18 +19,20 @@ body {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-
 }
 
 .grid-container {
-    margin: 1rem;
+    margin: 2rem;
     max-width: var(--gridSize);
     height: var(--gridSize);
     display: grid;
     grid-template-columns: repeat(var(--edgeSize), 1fr);
     grid-template-rows: repeat(var(--edgeSize), 1fr);
+
+    border: .5rem solid;
+    
 }
 
 .cell {
-    background: lightgray;
+    background: ;
 }
