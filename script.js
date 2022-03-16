@@ -37,6 +37,9 @@ function createNewGrid (parent, oldGrid) {
     parent.replaceChild(newGrid, parent.firstChild);
 }
 
+const gridEdgeSize = 16;
 const body = document.querySelector("body");
-const container = createGrid(body, 6);
+const container = createGrid(body, gridEdgeSize);
 const clearBtn = createClearButton(body, container);
+const root = document.documentElement;
+root.style.setProperty('--edgeSize', gridEdgeSize);

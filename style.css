@@ -6,8 +6,8 @@
 
 :root {
     font-size: 10px;
-    --cellSize: 10rem;
     --gridSize: 50rem;
+    --edgeSize: 5;
 }
 
 button {
@@ -28,16 +28,14 @@ body {
     max-width: var(--gridSize);
     height: var(--gridSize);
     display: grid;
-    grid-template-columns: repeat(auto-fill, var(--cellSize));
-    grid-template-rows: repeat(auto-fill, var(--cellSize));
-    row-gap: 1rem;
-    column-gap: 1rem;
+    grid-template-columns: repeat(var(--edgeSize), 1fr);
+    grid-template-rows: repeat(var(--edgeSize), 1fr);
+    /* row-gap: 1rem;
+    column-gap: 1rem; */
 }
 
 .cell {
-    width: var(--cellSize);
-    height: var(--cellSize);
     background-color: lightgray;
-    border: .2rem solid;
-    border-radius: .5rem;
+    /* border: .2rem solid;
+    border-radius: .5rem; */
 }
