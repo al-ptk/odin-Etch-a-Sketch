@@ -10,6 +10,9 @@ function createGrid (parent, gridEdgeSize) {
     container.childNodes.forEach(
         div => div.addEventListener('mouseover', setHoveredState)
     );
+    container.childNodes.forEach(
+        div => div.addEventListener('touchmove', setHoveredState)
+    );
     //Sets :root property on css
     document.documentElement.style.setProperty('--edgeSize', gridEdgeSize);
     //appendChild returns the reference to child
@@ -60,6 +63,12 @@ function toggleParty (e) {
     document.documentElement.style.background = newBg;
     return partyUp = !partyUp;
 }
+
+// Future functionality => Draw only when mouse down.
+// Inspiration
+//      let mouseDown = false
+//      document.body.onmousedown = () => (mouseDown = true)
+//      document.body.onmouseup = () => (mouseDown = false)
 
 // Initial Parameters
 const gridEdgeSize = 100;
